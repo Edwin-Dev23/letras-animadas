@@ -15,8 +15,9 @@
       justify-content: center; align-items: center; overflow: hidden;
     }
     #lyric-display {
+      z-index: 100 !important;
       text-align: center; padding: 20px; transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-      filter: blur(15px); opacity: 0; transform: translateY(20px) scale(0.9);
+      filter: blur(0px); opacity: 1; transform: translateY(20px) scale(0.9);
       max-width: 80%;
     }
     .active {
@@ -36,7 +37,7 @@
     .particle { position: absolute; pointer-events: none; animation: fall linear infinite; }
     @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
   </style>
-  <script type="module" crossorigin src="/letras-animadas/assets/index-HguJP0BC.js"></script>
+  <script type="module" crossorigin src="/letras-animadas/assets/index-DAcgmAyv.js"></script>
 </head>
 <body>
   <button id="btn-play">Iniciar Experiencia 🌻</button>
