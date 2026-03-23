@@ -1,49 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para Ti 🌻</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
-  <style>
-    :root { --accent: #ffeb3b; }
-    body {
-      background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-      color: #fff;
-      font-family: 'Quicksand', sans-serif;
-      margin: 0; height: 100vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: center; overflow: hidden;
-    }
-    #lyric-display {
-      z-index: 100 !important;
-      text-align: center; padding: 20px; transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-      filter: blur(0px); opacity: 1; transform: translateY(20px) scale(0.9);
-      max-width: 80%;
-    }
-    .active {
-      filter: blur(0px) !important; opacity: 1 !important;
-      transform: translateY(0) scale(1) !important;
-    }
-    .main-text { font-family: 'Playfair Display', serif; font-size: 2.5rem; display: block; margin-bottom: 10px; color: var(--accent); }
-    .sub-text { font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
-    
-    #btn-play {
-      padding: 15px 40px; background: transparent; border: 1px solid var(--accent);
-      color: var(--accent); font-size: 1rem; cursor: pointer; border-radius: 2px;
-      letter-spacing: 3px; text-transform: uppercase; transition: 0.5s;
-    }
-    #btn-play:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent); }
-    
-    .particle { position: absolute; pointer-events: none; animation: fall linear infinite; }
-    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-  </style>
-  <script type="module" crossorigin src="/letras-animadas/assets/index-DAcgmAyv.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti 🌻</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+        /* EL CONTENEDOR MAESTRO */
+        #lyric-display {
+            position: absolute;
+            width: 90%;
+            text-align: center;
+            z-index: 999; /* Por encima de todo */
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .main-text {
+            display: block;
+            font-size: 2rem;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .sub-text {
+            display: block;
+            font-size: 1.1rem;
+            color: #ffffff;
+            opacity: 0.9;
+        }
+        #btn-play {
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            background: #ffeb3b;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .particle {
+            position: absolute;
+            top: -50px;
+            z-index: 1; /* Por debajo del texto */
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+        .signature {
+            position: absolute;
+            bottom: 10px;
+            font-size: 0.8rem;
+            opacity: 0.4;
+            z-index: 999;
+        }
+    </style>
 </head>
 <body>
-  <button id="btn-play">Iniciar Experiencia 🌻</button>
-  <div id="lyric-display">
-    <span class="main-text" id="main"></span>
-    <span class="sub-text" id="sub"></span>
-  </div>
+
+    <button id="btn-play">Iniciar Experiencia 🌻</button>
+
+    <div id="lyric-display">
+        <span class="main-text" id="main"></span>
+        <span class="sub-text" id="sub"></span>
+    </div>
+
+    <div class="signature">by Edwin-Dev</div>
+
+    <script>
+        const audio = new Audio('cancion.mp3');
+        const btn = document.getElementById('btn-play');
+        const display = document.getElementById('lyric-display');
+        const main = document.getElementById('main');
+        const sub = document.getElementById('sub');
+
+        const letras = [
+            { t: 1, m: "Dicen que lo bueno...", s: "siempre se hace esperar ✨" },
+            { t: 5, m: "Por eso estos girasoles", s: "tardaron un poquito más en florecer 🌻" },
+            { t: 9, m: "Pero aquí están...", s: "con mucho cariño y dedicación." },
+            { t: 13, m: "Porque es mejor tarde...", s: "que nunca." },
+            { t: 17, m: "Él la estaba esperando con una flor amarilla 🧑🌻", s: "Ella lo estaba soñando con la luz en su pupila 🧑‍🦰✨" },
+            { t: 32, m: "Y el amarillo del sol iluminaba la esquina 🌞", s: "Lo sentía tan cercano... lo sentía desde niña 🧑‍🦰✨" },
+            { t: 46, m: "Ella sabía que él sabía que algún día pasaría...", s: "Que vendría a buscarla con sus flores amarillas 🌼" },
+            { t: 59, m: "No te apures, no detengas el instante del encuentro 🌼", s: "La vida nunca está dormida 🌼" },
+            { t: 76, m: "Ojalá la espera haya valido la pena 💛", s: "Con mucho cariño 💛✨🌻" }
+        ];
+
+        function createParticle() {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const icons = ['🌻', '🌼', '✨'];
+            p.innerText = icons[Math.floor(Math.random() * icons.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 7000);
+        }
+
+        btn.onclick = () => {
+            btn.style.display = 'none';
+            audio.play().catch(e => console.error("Error al reproducir audio:", e));
+            setInterval(createParticle, 200);
+
+            audio.addEventListener('timeupdate', () => {
+                const tiempo = audio.currentTime;
+                const frase = letras.find(l => tiempo >= l.t && tiempo < l.t + 6);
+
+                if (frase) {
+                    display.style.opacity = "1";
+                    if (main.innerText !== frase.m) {
+                        main.innerText = frase.m;
+                        sub.innerText = frase.s;
+                    }
+                } else {
+                    display.style.opacity = "0";
+                }
+            });
+        };
+    </script>
 </body>
 </html>
