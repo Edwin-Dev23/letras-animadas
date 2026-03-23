@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Ti 🌻</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root { --accent: #ffeb3b; }
+    body {
+      background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+      color: #fff;
+      font-family: 'Quicksand', sans-serif;
+      margin: 0; height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; overflow: hidden;
+    }
+    #lyric-display {
+      text-align: center; padding: 20px; transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: blur(15px); opacity: 0; transform: translateY(20px) scale(0.9);
+      max-width: 80%;
+    }
+    .active {
+      filter: blur(0px) !important; opacity: 1 !important;
+      transform: translateY(0) scale(1) !important;
+    }
+    .main-text { font-family: 'Playfair Display', serif; font-size: 2.5rem; display: block; margin-bottom: 10px; color: var(--accent); }
+    .sub-text { font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; }
+    
+    #btn-play {
+      padding: 15px 40px; background: transparent; border: 1px solid var(--accent);
+      color: var(--accent); font-size: 1rem; cursor: pointer; border-radius: 2px;
+      letter-spacing: 3px; text-transform: uppercase; transition: 0.5s;
+    }
+    #btn-play:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent); }
+    
+    .particle { position: absolute; pointer-events: none; animation: fall linear infinite; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+  </style>
+  <script type="module" crossorigin src="/letras-animadas/assets/index-C2ZETnzT.js"></script>
+</head>
+<body>
+  <button id="btn-play">Iniciar Experiencia 🌻</button>
+  <div id="lyric-display">
+    <span class="main-text" id="main"></span>
+    <span class="sub-text" id="sub"></span>
+  </div>
+</body>
+</html>
